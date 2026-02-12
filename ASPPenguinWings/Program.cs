@@ -1,5 +1,6 @@
 using ASPPenguinWings.Data;
 using ASPPenguinWings.Models;
+using ASPShopBag.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,12 +19,13 @@ namespace ASPPenguinWings
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddDefaultIdentity<Customer>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddRoles<IdentityRole>() //
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
             builder.Services.AddControllersWithViews();
-
+            builder.Services.AddControllers(op => op.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true);
             var app = builder.Build();
-
+            app.PrepareDataBase().Wait();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

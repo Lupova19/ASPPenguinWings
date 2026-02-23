@@ -93,6 +93,8 @@ namespace ASPPenguinWings.Areas.Identity.Pages.Account
             [Display(Name = "Телефон")]
             public string PhoneNumber { get; set; }
 
+            public DateTime DateOn { get; set; } = DateTime.Now;
+
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
@@ -124,7 +126,8 @@ namespace ASPPenguinWings.Areas.Identity.Pages.Account
                customer.Name = Input.FirstName;
                customer.Surname = Input.LastName;
                customer.PhoneNumber = Input.PhoneNumber;
-                customer.UserName = Input.UserName;
+               customer.UserName = Input.UserName;
+               customer.DateOn = Input.DateOn;
 
 
                 await _userStore.SetUserNameAsync(customer, Input.UserName, CancellationToken.None);

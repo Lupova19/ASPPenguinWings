@@ -61,6 +61,7 @@ namespace ASPShopBag.Services
                     PhoneNumber = "0899999999",
                     EmailConfirmed = true,
                     PhoneNumberConfirmed = true
+                    
                 };
 
                 var user = await userManager.FindByEmailAsync(defaultUser.Email);

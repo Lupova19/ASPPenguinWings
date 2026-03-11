@@ -59,6 +59,7 @@ namespace ASPPenguinWings.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name,CategoryId,Size,Quantity,Description,Apply,ImageUrl,Price,DateOn")] Product product)
         {
+            product.DateOn = DateTime.Now;
             if (ModelState.IsValid)
             {
                 _context.Add(product);
@@ -93,6 +94,7 @@ namespace ASPPenguinWings.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,CategoryId,Size,Quantity,Description,Apply,ImageUrl,Price,DateOn")] Product product)
         {
+            product.DateOn = DateTime.Now;
             if (id != product.Id)
             {
                 return NotFound();

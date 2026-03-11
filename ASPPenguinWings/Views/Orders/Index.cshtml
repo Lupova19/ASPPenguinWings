@@ -31,10 +31,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Products.Id)
+                @Html.DisplayFor(modelItem => item.Products.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Customers.Id)
+                @Html.DisplayFor(modelItem => item.Customers.UserName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Quantity)

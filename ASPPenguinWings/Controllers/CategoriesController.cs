@@ -56,6 +56,7 @@ namespace ASPPenguinWings.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,DateOn")] Category category)
         {
+            category.DateOn = DateTime.Now;
             if (ModelState.IsValid)
             {
                 _context.Add(category);

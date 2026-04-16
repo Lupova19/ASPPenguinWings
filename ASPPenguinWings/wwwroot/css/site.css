@@ -18,7 +18,8 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    background: linear-gradient(to bottom, #eef7fa, #d6ecf2, #bcdde6);
+    margin-bottom: 60px;
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -29,3 +30,573 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+        .card button:hover {
+            background-color: #16a085;  Тъмен оттенък при hover 
+        }
+.card-link {
+    text-decoration: none;  маха подчертаването 
+    color: inherit;  запазва цвета 
+}
+
+    .card-link:hover {
+        text-decoration: none;
+    }
+.product-details {
+    display: flex;
+    gap: 40px;
+    margin-top: 30px;
+    align-items: flex-start;
+}
+
+ /*Снимка*/ 
+.product-image img {
+    width: 350px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+ /*Информация*/ 
+.product-info {
+    max-width: 500px;
+}
+
+    .product-info h2 {
+        margin-bottom: 10px;
+    }
+
+.price {
+    font-size: 24px;
+    color: #1abc9c;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.description {
+    margin-top: 15px;
+    font-size: 16px;
+}
+
+ /*Бутон*/ 
+.buy-btn {
+    margin-top: 20px;
+    padding: 12px 20px;
+    background-color: #1abc9c;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+    .buy-btn:hover {
+        background-color: #16a085;
+    }
+ /*бутон create*/ 
+.create-btn {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    background-color: #3498db;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+    .create-btn:hover {
+        background-color: #2980b9;
+    }
+
+.products {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 25px;
+    justify-content: center;
+}
+
+ /*карта*/ 
+.card {
+    width: 260px;
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    transition: 0.3s;
+    position: relative;
+}
+
+     hover ефект 
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+     /*снимка*/ 
+    .card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+     /*име*/ 
+    .card h4 {
+        margin: 10px 0;
+        font-size: 18px;
+    }
+
+ /*цена*/ 
+.price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1abc9c;
+}
+
+ /*категория*/ 
+.card p {
+    color: #777;
+    font-size: 14px;
+}
+
+ /*бутони*/ 
+.actions {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+     /*бутон стил */
+    .actions a {
+        text-decoration: none;
+        padding: 6px;
+        border-radius: 20px;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+
+        /* виж */
+        .actions a:first-child {
+            background: #3498db;
+            color: white;
+        }
+
+         /*admin бутони */
+        .actions a:nth-child(2) {
+            background: #f39c12;
+            color: white;
+        }
+
+        .actions a:nth-child(3) {
+            background: #e74c3c;
+            color: white;
+        }
+
+         hover 
+        .actions a:hover {
+            opacity: 0.8;
+        }
+
+ /*бутон add*/ 
+.create-btn {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    background: #1abc9c;
+    color: white;
+    border-radius: 20px;
+    text-decoration: none;
+}
+
+
+     /*снимка*/ 
+    .card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+ /*цена*/ 
+.price {
+    font-weight: bold;
+    color: #1abc9c;
+    margin: 10px 0;
+}
+
+ /*категория*/ 
+.category {
+    font-size: 14px;
+    color: gray;
+}
+
+ /*бутони*/ 
+.actions {
+    margin-top: 10px;
+}
+
+    .actions a {
+        display: inline-block;
+        margin: 5px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        text-decoration: none;
+        background-color: #ecf0f1;
+        color: black;
+    }
+
+        .actions a:hover {
+            background-color: #bdc3c7;
+        }
+
+.navbar {
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+    padding: 10px 20px;
+}
+
+ /*Лого*/ 
+.navbar-brand {
+    color: white !important;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+ /*Линкове*/ 
+.navbar .nav-link {
+    color: #ecf0f1 !important;
+    margin-right: 15px;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+     /*Hover ефект*/ 
+    .navbar .nav-link:hover {
+        color: #1abc9c !important;
+    }
+
+ /*Dropdown*/ 
+.dropdown-menu {
+    background-color: #2c5364;
+    border-radius: 10px;
+    border: none;
+}
+
+.dropdown-item {
+    color: white;
+}
+
+    .dropdown-item:hover {
+        background-color: #1abc9c;
+        color: white;
+    }
+
+
+.penguin-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-img {
+    width: 65px;
+}
+
+.hero {
+    height: 80vh;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/penguin.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+ /*текст*/ 
+.hero-text {
+    color: white;
+}
+
+    .hero-text h1 {
+        font-size: 50px;
+        margin-bottom: 10px;
+    }
+
+    .hero-text p {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+ /*бутон*/ 
+.hero-btn {
+    background-color: #1abc9c;
+    padding: 12px 25px;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+    .hero-btn:hover {
+        background-color: #16a085;
+    }
+
+ /*секция*/ 
+.categories {
+    text-align: center;
+    margin: 80px 0;
+}
+
+    .categories h2 {
+        font-size: 32px;
+        margin-bottom: 40px;
+        color: #2c3e50;
+    }
+
+ /*контейнер*/ 
+.category-cards {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+ /*карта*/ 
+.category-card {
+    position: relative;
+    width: 260px;
+    height: 200px;
+    border-radius: 15px;
+    overflow: hidden;
+    text-decoration: none;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    transition: 0.4s;
+}
+
+     /*снимка*/ 
+    .category-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: 0.5s;
+    }
+
+     /*overlay (тъмния слой)*/ 
+    .category-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0.4);
+        transition: 0.4s;
+    }
+
+     /*текст*/ 
+    .category-card h3 {
+        position: absolute;
+        bottom: 15px;
+        left: 20px;
+        color: white;
+        font-size: 20px;
+        z-index: 2;
+        margin: 0;
+    }
+
+     /*hover ефекти*/ 
+    .category-card:hover {
+        transform: translateY(-10px) scale(1.03);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    }
+
+        .category-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .category-card:hover::after {
+            background: rgba(0,0,0,0.6);
+        }
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1;
+}
+ /*Footer*/ 
+.site-footer {
+    background: linear-gradient(to right, #203a43, #2c5364);
+    color: #ecf0f1;
+    padding: 50px 20px 20px;
+    font-size: 14px;
+    margin-top: 30px;
+}
+
+ /*контейнер*/ 
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
+}
+
+ /*секции*/ 
+.footer-section {
+    flex: 1 1 250px;
+    margin: 10px;
+    text-align: center;
+    align-items: flex-start;
+}
+
+
+
+     /*заглавия*/ 
+    .footer-section h3 {
+        margin-bottom: 15px;
+        color: #1abc9c;
+    }
+
+     /*списък*/ 
+    .footer-section ul {
+        list-style: none;
+        padding: 0;
+    }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+     /*линкове*/ 
+    .footer-section a {
+        color: #ecf0f1;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+        .footer-section a:hover {
+            color: #1abc9c;
+        }
+
+ /*СОЦИАЛНИ ИКОНИ (кръгли)*/ 
+.social-icons {
+    display: flex;
+    gap: 10px;
+}
+
+    .social-icons a {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: white;
+        border-radius: 50%;  прави ги кръгли 
+
+        overflow: hidden;
+        transition: 0.3s;
+        text-align: center;
+    }
+
+     /*самите картинки*/ 
+    .social-icons img {
+        width: 20px;
+        height: 20px;
+    }
+
+     /*hover ефект*/ 
+    .social-icons a:hover {
+        background: #1abc9c;
+        transform: scale(1.1);
+    }
+
+ /*долна част*/ 
+.footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    font-size: 13px;
+}
+
+/*оъ*/
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 100px 0;
+    flex-wrap: wrap;
+}
+
+ /*КАРТИ*/ 
+.feature-box {
+    position: relative;
+    background: linear-gradient(135deg, #ffffff, #f7f9fb);
+    padding: 40px 25px;
+    width: 260px;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.4s ease;
+    overflow: hidden;
+}
+
+     /*glow ефект*/ 
+    .feature-box::before {
+        content: "";
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        top: -50%;
+        left: -50%;
+        background: radial-gradient(circle, rgba(26,188,156,0.15), transparent 70%);
+        opacity: 0;
+        transition: 0.4s;
+    }
+
+     /*hover*/ 
+    .feature-box:hover {
+        transform: translateY(-12px) scale(1.03);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+         glow при hover 
+        .feature-box:hover::before {
+            opacity: 1;
+        }
+
+     /*ИКОНА*/ 
+    .feature-box h3 {
+        font-size: 22px;
+        margin-bottom: 15px;
+        color: #2c3e50;
+    }
+
+     /*ТЕКСТ*/ 
+    .feature-box p {
+        font-size: 15px;
+        color: #7f8c8d;
+    }
+/*
+     ЛИНИЯ ОТДОЛУ */
+    .feature-box::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 4px;
+        width: 0;
+        background: #1abc9c;
+        transition: 0.4s;
+    }
+
+    .feature-box:hover::after {
+        width: 100%;
+    }
+
+ /*   от тукккк*/

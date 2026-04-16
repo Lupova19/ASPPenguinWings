@@ -1,8 +1,57 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Начало";
 }
 
-<div class="text-center">
+@* <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div> *@
+<div class="hero">
+
+    <div class="hero-text">
+        <h1>Крилете на пингвина</h1>
+        <p>
+            Изборът на щастливите любимци.
+        </p>
+
+
+        <a asp-controller="Products" asp-action="Index" class="hero-btn">
+            Виж всички продукти
+        </a>
+    </div>
+</div>
+
+@* <h2 class="text-center mt-5">Популярни продукти</h2>
+
+<div class="products">
+    @foreach (var item in Model.Take(6))
+    {
+        <div class="card">
+            <img src="@item.ImageUrl" />
+            <h4>@item.Name</h4>
+            <p class="price">@item.Price лв.</p>
+
+            <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Id">
+                Виж
+            </a>
+        </div>
+    }
+</div> *@
+<div class="features">
+
+    <div class="feature-box">
+        <h3>🚚 Бърза доставка</h3>
+        <p>До 24 часа в цялата страна</p>
+    </div>
+
+    <div class="feature-box">
+        <h3>💎 Качество</h3>
+        <p>Само проверени продукти</p>
+    </div>
+
+    <div class="feature-box">
+        <h3>🐾 За всеки любимец</h3>
+        <p>Кучета, котки и риби</p>
+    </div>
+
 </div>

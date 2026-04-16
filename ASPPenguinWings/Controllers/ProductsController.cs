@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ASPPenguinWings.Data;
+using ASPPenguinWings.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ASPPenguinWings.Data;
-using ASPPenguinWings.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ASPPenguinWings.Controllers
 {
@@ -46,6 +47,7 @@ namespace ASPPenguinWings.Controllers
         }
 
         // GET: Products/Create
+        [Authorize(Roles = "Admin")] //
         public IActionResult Create()
         {
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
@@ -53,8 +55,7 @@ namespace ASPPenguinWings.Controllers
         }
 
         // POST: Products/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name,CategoryId,Size,Quantity,Description,Apply,ImageUrl,Price,DateOn")] Product product)
@@ -71,6 +72,7 @@ namespace ASPPenguinWings.Controllers
         }
 
         // GET: Products/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -125,6 +127,7 @@ namespace ASPPenguinWings.Controllers
         }
 
         // GET: Products/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -161,6 +164,29 @@ namespace ASPPenguinWings.Controllers
         private bool ProductExists(int id)
         {
             return _context.Products.Any(e => e.Id == id);
+        }
+        // // //
+        // GET: Products/ByCategory/5
+        public async Task<IActionResult> ByCategory(int id)
+        {
+            // Взимаме категорията по id
+            var category = await _context.Categories
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            // Взимаме продуктите само от тази категория
+            var products = await _context.Products
+                .Where(p => p.CategoryId == id)
+                .ToListAsync();
+
+            // Изпращаме името на категорията за заглавие
+            ViewBag.CategoryName = category.Name;
+
+            return View(products); // View получава List<Product>
         }
     }
 }

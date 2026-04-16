@@ -1,12 +1,13 @@
-﻿using System;
+﻿using ASPPenguinWings.Data;
+using ASPPenguinWings.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Build.Tasks.Deployment.Bootstrapper;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using ASPPenguinWings.Data;
-using ASPPenguinWings.Models;
 
 namespace ASPPenguinWings.Controllers
 {
@@ -73,8 +74,8 @@ namespace ASPPenguinWings.Controllers
             {
                 return NotFound();
             }
-
             var category = await _context.Categories.FindAsync(id);
+
             if (category == null)
             {
                 return NotFound();
@@ -89,6 +90,7 @@ namespace ASPPenguinWings.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,DateOn")] Category category)
         {
+            category.DateOn = DateTime.Now;
             if (id != category.Id)
             {
                 return NotFound();

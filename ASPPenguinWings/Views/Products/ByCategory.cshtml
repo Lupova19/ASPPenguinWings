@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewData["Title"] = "ByCategory";
+}
+
+<h1>ByCategory</h1>
+@* <div class="products">
+    @foreach (var product in Model)
+    {
+        <div class="card">
+            <img src="@product.ImageUrl" alt="@product.Name" />
+            <h4>@product.Name</h4>
+            <p>@product.Price лв.</p>
+            <button>Купи</button>
+        </div>
+    }
+</div>
+ *@
+@foreach (var product in Model)
+{
+    <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id" class="card-link">
+        <div class="card">
+            <img src="@product.ImageUrl" alt="@product.Name" />
+            <h4>@product.Name</h4>
+            <p>@product.Price лв.</p>
+        </div>
+    </a>
+}

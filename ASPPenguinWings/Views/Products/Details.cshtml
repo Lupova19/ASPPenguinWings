@@ -1,11 +1,11 @@
 ﻿@model ASPPenguinWings.Models.Product
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Детайли за продукт";
 }
 
 <h1>Details</h1>
-
+@* 
 <div>
     <h4>Product</h4>
     <hr />
@@ -65,7 +65,31 @@
             @Html.DisplayFor(model => model.DateOn)
         </dd>
     </dl>
+</div> *@
+<div class="product-details">
+
+    <!-- Снимка -->
+    <div class="product-image">
+        <img src="@Model.ImageUrl" alt="@Model.Name" />
+    </div>
+
+    <!-- Информация -->
+    <div class="product-info">
+        <h2>@Model.Name</h2>
+
+        <p class="price">@Model.Price лв.</p>
+
+        <p><strong>Категория:</strong> @Model.Categories?.Name</p>
+        <p><strong>Размер:</strong> @Model.Size</p>
+        <p><strong>Количество:</strong> @Model.Quantity</p>
+        <p><strong>За:</strong> @Model.Apply</p>
+        <p><strong>Описание:</strong> @Model.Description</p>
+
+        <button class="buy-btn">Купи</button>
+    </div>
+
 </div>
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>

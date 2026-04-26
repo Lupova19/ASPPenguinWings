@@ -73,7 +73,7 @@
         <img src="@Model.ImageUrl" alt="@Model.Name" />
     </div>
 
-    <!-- Информация -->
+     <!-- Информация --> 
     <div class="product-info">
         <h2>@Model.Name</h2>
 
@@ -85,7 +85,7 @@
         <p><strong>За:</strong> @Model.Apply</p>
         <p><strong>Описание:</strong> @Model.Description</p>
 
-        <button class="buy-btn">Купи</button>
+        <a class="buy-btn" asp-controller="Orders" asp-action="CreateById" asp-route-productId="@Model.Id" formmethod="get">Купи</a>
     </div>
 
 </div>

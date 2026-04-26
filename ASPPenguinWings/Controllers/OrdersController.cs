@@ -1,14 +1,15 @@
-﻿using System;
+﻿using ASPPenguinWings.Data;
+using ASPPenguinWings.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Build.Tasks.Deployment.Bootstrapper;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using ASPPenguinWings.Data;
-using ASPPenguinWings.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Authorization;
 
 namespace ASPPenguinWings.Controllers
 {
@@ -27,8 +28,20 @@ namespace ASPPenguinWings.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Orders.Include(o => o.Customers).Include(o => o.Products);
-            return View(await applicationDbContext.ToListAsync());
+            string lognatUser = _userManager.GetUserId(User);
+            if (User.IsInRole("Admin"))
+            {
+                var applicationDbContext = _context.Orders.Include(o => o.Customers).Include(o => o.Products);
+                return View(await applicationDbContext.ToListAsync());
+            }
+            else
+            {
+                var applicationDbContext = _context.Orders
+                    .Include(o => o.Customers)
+                    .Include(o => o.Products)
+                    .Where(v=> v.CustomerId==lognatUser);
+                return View(await applicationDbContext.ToListAsync());
+            }
         }
 
         // GET: Orders/Details/5
@@ -58,7 +71,46 @@ namespace ASPPenguinWings.Controllers
             ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Name");
             return View();
         }
+        public async Task<IActionResult> CreateById(int productId)
+        {
+            //Order order = new Order();
+            //order.DateOn = DateTime.Now;
+            //order.CustomerId = _userManager.GetUserId(User);
+            //order.ProductId = productId;
+            //order.Quantity = 1;
+            //if (ModelState.IsValid)
+            //{
+            //    _context.Orders.Add(order);
+            //    await _context.SaveChangesAsync();
+            //    return RedirectToAction(nameof(Index));
+            //}
+            //return View("Index");
+            string userId = _userManager.GetUserId(User);
 
+            var existingOrder = _context.Orders
+                .FirstOrDefault(o => o.ProductId == productId && o.CustomerId == userId);
+
+            if (existingOrder != null)
+            {
+                existingOrder.Quantity++;
+            }
+            else
+            {
+                Order order = new Order
+                {
+                    DateOn = DateTime.Now,
+                    CustomerId = userId,
+                    ProductId = productId,
+                    Quantity = 1
+                };
+
+                _context.Orders.Add(order);
+            }
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
         // POST: Orders/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -104,6 +156,8 @@ namespace ASPPenguinWings.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,ProductId,CustomerId,Quantity,DateOn")] Order order)
         {
+            order.DateOn = DateTime.Now;
+
             if (id != order.Id)
             {
                 return NotFound();
@@ -172,6 +226,53 @@ namespace ASPPenguinWings.Controllers
         private bool OrderExists(int id)
         {
             return _context.Orders.Any(e => e.Id == id);
+        }
+        //h
+        public async Task<IActionResult> Increase(int id)
+        {
+            var order = await _context.Orders.FindAsync(id);
+
+            if (order != null)
+            {
+                order.Quantity++;
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> Decrease(int id)
+        {
+            var order = await _context.Orders.FindAsync(id);
+
+            if (order != null)
+            {
+                order.Quantity--;
+
+                if (order.Quantity <= 0)
+                {
+                    _context.Orders.Remove(order);
+                }
+
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> Checkout()
+        {
+            string userId = _userManager.GetUserId(User);
+
+            var orders = _context.Orders
+                .Where(o => o.CustomerId == userId);
+
+            _context.Orders.RemoveRange(orders);
+
+            await _context.SaveChangesAsync();
+
+            TempData["Message"] = "Поръчката беше успешно завършена!";
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

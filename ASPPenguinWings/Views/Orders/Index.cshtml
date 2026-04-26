@@ -3,51 +3,63 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+@* jijk *@
+@* @if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Message"]
+    </div>
+} *@
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Products)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Customers)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateOn)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Products.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Customers.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOn)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+
+<h2>Моята количка 🛒</h2>
+
+@if (!Model.Any())
+{
+    <p>Нямате добавени продукти.</p>
 }
-    </tbody>
-</table>
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Продукт</th>
+                <th>Цена</th>
+                <th>Количество</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Products.Name</td>
+                    <td>@item.Products.Price лв.</td>
+                    <td>
+                        <a asp-action="Decrease" asp-route-id="@item.Id">➖</a>
+                        @item.Quantity
+                        <a asp-action="Increase" asp-route-id="@item.Id">➕</a>
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> 
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">
+                            Премахни
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h4>
+        Общо: @Model.Sum(x => x.Products.Price * x.Quantity) лв.
+    </h4>
+
+    @if (Model.Any())
+    {
+        <a asp-action="Checkout" class="btn btn-success">
+            💳 Завърши поръчка
+        </a>
+    }
+}

@@ -1,0 +1,47 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@if (TempData["Success"] != null)
+{
+    <div class="alert-success">
+        @TempData["Success"]
+    </div>
+}
+<div class="contact-page">
+
+    <h1>📞 Свържи се с нас</h1>
+
+    <div class="contact-container">
+        <form asp-action="Contact" method="post" class="contact-form">
+
+            <h3>Изпрати съобщение</h3>
+
+            <input type="text" name="name" placeholder="Име" required />
+            <input type="email" name="email" placeholder="Имейл" required />
+            <textarea name="message" placeholder="Съобщение" required></textarea>
+
+            <button type="submit">Изпрати</button>
+
+        </form>
+
+        <!-- ДЯСНА ЧАСТ (инфо + карта) -->
+        <div class="contact-info">
+            <h3>Нашият магазин</h3>
+
+            <p>📍 София, България</p>
+            <p>📞 +359 88 123 4567</p>
+            <p>📧 info@penguinwings.bg</p>
+
+            <!-- КАРТА -->
+            <iframe src="https://www.google.com/maps?q=Sofia,Bulgaria&output=embed"
+                    width="100%"
+                    height="250"
+                    style="border:0; border-radius:10px; margin-top:15px;">
+            </iframe>
+        </div>
+
+    </div>
+</div>
+

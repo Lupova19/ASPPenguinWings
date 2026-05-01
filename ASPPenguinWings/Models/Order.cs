@@ -11,5 +11,6 @@ namespace ASPPenguinWings.Models
         public Customer Customers { get; set; }
         public int Quantity { get; set; }
         public DateTime DateOn { get; set; }
+        public bool IsCompleted { get; set; } = false;
     }
 }

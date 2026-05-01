@@ -35,5 +35,23 @@ namespace ASPPenguinWings.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        public IActionResult About()
+        {
+            return View();
+        }
+
+        public IActionResult Contact()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Contact(string name, string email, string message)
+        {
+            // тук може после да запазваш в база или пращаш имейл
+
+            TempData["Success"] = "Съобщението беше изпратено успешно!";
+
+            return RedirectToAction("Contact");
+        }
     }
 }

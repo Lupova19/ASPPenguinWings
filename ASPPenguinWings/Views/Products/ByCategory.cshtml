@@ -5,16 +5,6 @@
 
 <h1>ByCategory</h1>
 
-@* @foreach (var product in Model)
-{
-    <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id" class="card-link">
-        <div class="card">
-            <img src="@product.ImageUrl" alt="@product.Name" />
-            <h4>@product.Name</h4>
-            <p>@product.Price лв.</p>
-        </div>
-    </a>
-} *@
 @foreach (var product in Model)
 {
     <div class="card">
@@ -48,7 +38,7 @@
             @if (User.IsInRole("Admin"))
             {
                 <a asp-controller="Products" asp-action="Edit" asp-route-id="@product.Id">
-                    Edit
+                    Редактирай
                 </a>
             }
 

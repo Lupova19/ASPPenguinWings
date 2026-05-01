@@ -4,12 +4,12 @@
     ViewData["Title"] = "Index";
 }
 @* jijk *@
-@* @if (TempData["Message"] != null)
+@if (TempData["Message"] != null)
 {
     <div class="alert alert-success">
         @TempData["Message"]
     </div>
-} *@
+}
 <h1>Index</h1>
 
 
@@ -42,10 +42,15 @@ else
                         <a asp-action="Increase" asp-route-id="@item.Id">➕</a>
                     </td>
                     <td>
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> 
                         <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">
                             Премахни
                         </a>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Complete" asp-route-id="@item.Id" class="btn btn-success">
+                                Завърши поръчка
+                            </a>
+                        }
                     </td>
                 </tr>
             }
@@ -56,10 +61,17 @@ else
         Общо: @Model.Sum(x => x.Products.Price * x.Quantity) лв.
     </h4>
 
-    @if (Model.Any())
+    @if (User.IsInRole("User"))
     {
         <a asp-action="Checkout" class="btn btn-success">
             💳 Завърши поръчка
         </a>
     }
+    @* @if (Model.Any())
+    {
+        <a asp-action="Checkout" class="btn btn-success">
+            💳 Завърши поръчка
+        </a>
+    } *@
+    
 }

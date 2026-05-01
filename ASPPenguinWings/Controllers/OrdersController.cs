@@ -28,18 +28,40 @@ namespace ASPPenguinWings.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
+            //string lognatUser = _userManager.GetUserId(User);
+            //if (User.IsInRole("Admin"))
+            //{
+            //    var applicationDbContext = _context.Orders.Include(o => o.Customers).Include(o => o.Products);
+            //    return View(await applicationDbContext.ToListAsync());
+            //}
+            //else
+            //{
+            //    var applicationDbContext = _context.Orders
+            //        .Include(o => o.Customers)
+            //        .Include(o => o.Products)
+            //        .Where(v=> v.CustomerId==lognatUser);
+            //    return View(await applicationDbContext.ToListAsync());
+            //}
             string lognatUser = _userManager.GetUserId(User);
+
             if (User.IsInRole("Admin"))
             {
-                var applicationDbContext = _context.Orders.Include(o => o.Customers).Include(o => o.Products);
+                // 👉 Админ вижда САМО завършените поръчки
+                var applicationDbContext = _context.Orders
+                    .Include(o => o.Customers)
+                    .Include(o => o.Products)
+                    .Where(o => o.IsCompleted);
+
                 return View(await applicationDbContext.ToListAsync());
             }
             else
             {
+                // 👉 Потребител вижда САМО количката
                 var applicationDbContext = _context.Orders
                     .Include(o => o.Customers)
                     .Include(o => o.Products)
-                    .Where(v=> v.CustomerId==lognatUser);
+                    .Where(o => o.CustomerId == lognatUser && !o.IsCompleted);
+
                 return View(await applicationDbContext.ToListAsync());
             }
         }
@@ -264,15 +286,43 @@ namespace ASPPenguinWings.Controllers
             string userId = _userManager.GetUserId(User);
 
             var orders = _context.Orders
-                .Where(o => o.CustomerId == userId);
+                .Where(o => o.CustomerId == userId && !o.IsCompleted);
 
-            _context.Orders.RemoveRange(orders);
+            foreach (var order in orders)
+            {
+                order.IsCompleted = true;
+            }
 
             await _context.SaveChangesAsync();
 
             TempData["Message"] = "Поръчката беше успешно завършена!";
 
             return RedirectToAction(nameof(Index));
+        }
+        //ножжж
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Complete(int id)
+        {
+            var order = await _context.Orders.FindAsync(id);
+
+            if (order != null)
+            {
+                _context.Orders.Remove(order);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> MyOrders()
+        {
+            string userId = _userManager.GetUserId(User);
+
+            var orders = _context.Orders
+                .Include(o => o.Products)
+                .Where(o => o.CustomerId == userId)
+                .ToList();
+
+            return View(orders);
         }
     }
 }

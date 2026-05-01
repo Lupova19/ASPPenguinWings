@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewData["Title"] = "MyOrders";
+}
+<h2>Моите поръчки</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Продукт</th>
+            <th>Количество</th>
+            <th>Дата</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Products.Name</td>
+                <td>@item.Quantity</td>
+                <td>@item.DateOn.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>

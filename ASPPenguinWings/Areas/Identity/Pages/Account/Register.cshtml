@@ -1,4 +1,4 @@
-﻿@page
+﻿@*  @page
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
@@ -84,4 +84,70 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+} *@
+
+@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Регистрация";
 }
+
+<div class="register-container">
+
+    <!-- ЛЯВА ЧАСТ (ФОРМА) -->
+    <div class="register-form">
+
+        <h2>Създай акаунт</h2>
+        <p class="auth-subtitle">Започни пазаруването още днес 🐧</p>
+
+        <form method="post">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group mb-3">
+                <input asp-for="Input.FirstName" class="form-control" placeholder="Име" />
+            </div>
+
+            <div class="form-group mb-3">
+                <input asp-for="Input.LastName" class="form-control" placeholder="Фамилия" />
+            </div>
+
+            <div class="form-group mb-3">
+                <input asp-for="Input.UserName" class="form-control" placeholder="Потребителско име" />
+            </div>
+
+            <div class="form-group mb-3">
+                <input asp-for="Input.Email" class="form-control" placeholder="Имейл" />
+            </div>
+
+            <div class="form-group mb-3">
+                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Телефон" />
+            </div>
+
+            <div class="form-group mb-3">
+                <input asp-for="Input.Password" type="password" class="form-control" placeholder="Парола" />
+            </div>
+
+            <div class="form-group mb-3">
+                <input asp-for="Input.ConfirmPassword" type="password" class="form-control" placeholder="Потвърди парола" />
+            </div>
+
+            <button type="submit" class="register-btn">Регистрация</button>
+
+            <p class="login-link">
+                Имаш акаунт? <a asp-page="./Login">Вход</a>
+            </p>
+
+        </form>
+
+    </div>
+
+    <!-- ДЯСНА ЧАСТ (ВИЗУАЛНА) -->
+    <div class="register-image">
+        <div class="overlay">
+            <h3>Добре дошъл в Крилете на пингвина!</h3>
+            <p>Най-доброто за твоите любимци на едно място</p>
+        </div>
+    </div>
+
+</div>

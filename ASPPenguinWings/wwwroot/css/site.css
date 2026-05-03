@@ -604,7 +604,7 @@ body {
 .my-button {
     display: inline-block;
     padding: 5px 10px;
-    background-color: #5dade2; /* меко синьо */
+    background-color: #5dade2;  /*меко синьо */
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -612,10 +612,10 @@ body {
 }
 
     .my-button:hover {
-        background-color: #3498db; /* малко по-наситено */
+        background-color: #3498db;  /*малко по-наситено */
     }
-
-    /*about page*/
+/*
+    about page*/
 .about-simple {
     max-width: 1000px;
     margin: 60px auto;
@@ -627,20 +627,20 @@ body {
         margin-bottom: 50px;
     }
 
-/* ред */
-.about-row {
+/* ред 
+*/.about-row {
     display: flex;
     align-items: center;
     gap: 40px;
     margin-bottom: 50px;
 }
 
-    /* обръщане */
+    /* обръщане*/ 
     .about-row.reverse {
         flex-direction: row-reverse;
     }
 
-/* текст */
+ /*текст*/ 
 .about-text {
     flex: 1;
 }
@@ -653,7 +653,7 @@ body {
         color: #555;
     }
 
-/* снимка */
+ /*снимка*/ 
 .about-image img {
     width: 100%;
     max-width: 350px;
@@ -661,7 +661,7 @@ body {
     box-shadow: 0 5px 20px rgba(0,0,0,0.1);
 }
 
-/* бутон */
+ /*бутон*/ 
 .about-bottom {
     text-align: center;
     margin-top: 40px;
@@ -679,7 +679,7 @@ body {
         background: #16a085;
     }
 
-/* CONTACT PAGE */
+ /*CONTACT PAGE*/ 
 .contact-page {
     max-width: 1100px;
     margin: auto;
@@ -698,7 +698,7 @@ body {
     flex-wrap: wrap;
 }
 
-/* ЛЯВА ЧАСТ */
+ /*ЛЯВА ЧАСТ*/ 
 .contact-form {
     flex: 1;
     background: white;
@@ -735,7 +735,7 @@ body {
             background: #16a085;
         }
 
-/* ДЯСНА ЧАСТ */
+ /*ДЯСНА ЧАСТ*/ 
 .contact-info {
     flex: 1;
     background: linear-gradient(135deg, #2c5364, #203a43);
@@ -759,3 +759,174 @@ body {
     margin-bottom: 20px;
     text-align: center;
 }
+
+/*tukkk login*/
+/* ЦЕНТРИРАНЕ НА ЦЯЛАТА СТРАНИЦА */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    /* ФОН САМО ТУК */
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('/images/login2.jpg') center/cover no-repeat;
+    border-radius: 20px;
+    margin: 40px;
+}
+
+/* КУТИЯТА */
+.auth-box {
+    width: 100%;
+    max-width: 420px;
+    background: white;
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+    /* ЗАГЛАВИЕ */
+    .auth-box h2 {
+        margin-bottom: 5px;
+        color: #2c3e50;
+    }
+
+/* ПОДЗАГЛАВИЕ */
+.auth-subtitle {
+    color: #7f8c8d;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+/* INPUT ПОЛЕТА */
+.auth-box .form-control {
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    transition: 0.3s;
+}
+
+    .auth-box .form-control:focus {
+        border-color: #1abc9c;
+        box-shadow: 0 0 5px rgba(26,188,156,0.3);
+    }
+
+/* CHECKBOX */
+.form-check-label {
+    font-size: 14px;
+    color: #555;
+}
+
+/* БУТОН */
+.auth-btn {
+    width: 100%;
+    padding: 12px;
+    background: #1abc9c;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+    .auth-btn:hover {
+        background: #16a085;
+    }
+
+/* ЛИНКОВЕ */
+.auth-links {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+}
+
+    .auth-links a {
+        color: #1abc9c;
+        text-decoration: none;
+        transition: 0.2s;
+    }
+
+        .auth-links a:hover {
+            text-decoration: underline;
+        }
+
+/* ГРЕШКИ */
+.text-danger {
+    font-size: 13px;
+}
+
+/*tukkk register*/
+.register-container {
+    display: flex;
+    min-height: 90vh;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 40px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+/* ЛЯВО - ФОРМА */
+.register-form {
+    flex: 1;
+    background: white;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+    .register-form h2 {
+        margin-bottom: 10px;
+    }
+
+.register-btn {
+    width: 100%;
+    padding: 12px;
+    background: #1abc9c;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+    .register-btn:hover {
+        background: #16a085;
+    }
+
+/* ДЯСНО - СНИМКА */
+.register-image {
+    flex: 1;
+    background: url('/images/register.jpg') center/cover no-repeat;
+    position: relative;
+}
+
+    /* overlay */
+    .register-image .overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0.5);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+    }
+
+/* текст */
+.overlay h3 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.overlay p {
+    font-size: 16px;
+}
+
+/* линк */
+.login-link {
+    margin-top: 15px;
+    text-align: center;
+}
+

@@ -1,4 +1,4 @@
-﻿
+﻿@* 
 @{
     ViewData["Title"] = "MyOrders";
 }
@@ -23,3 +23,73 @@
         }
     </tbody>
 </table>
+ *@
+@model IEnumerable<ASPPenguinWings.Models.Order>
+
+@{
+    ViewData["Title"] = "Моите поръчки";
+}
+
+<div class="orders-page">
+
+    <h1 class="orders-title">📦 Моите поръчки</h1>
+
+    @if (!Model.Any())
+    {
+        <div class="empty-orders">
+            <h3>Все още нямате поръчки 🐾</h3>
+            <p>След като поръчате продукти, те ще се покажат тук.</p>
+        </div>
+    }
+    else
+    {
+        <div class="orders-grid">
+
+            @foreach (var item in Model)
+            {
+                <div class="order-card">
+
+                    <!-- СНИМКА -->
+                    <div class="order-image">
+                        <img src="@item.Products.ImageUrl" alt="@item.Products.Name" />
+                    </div>
+
+                    <!-- ИНФО -->
+                    <div class="order-info">
+
+                        <h3>@item.Products.Name</h3>
+
+                        <div class="order-price">
+                            @item.Products.Price лв.
+                        </div>
+
+                        <div class="order-details">
+
+                            <div class="detail-box">
+                                <span>Количество</span>
+                                <strong>@item.Quantity</strong>
+                            </div>
+
+                            <div class="detail-box">
+                                <span>Дата</span>
+                                <strong>@item.DateOn.ToShortDateString()</strong>
+                            </div>
+
+                        </div>
+
+                        <div class="order-total">
+                            Общо:
+                            <strong>
+                                @(item.Products.Price* item.Quantity) лв.
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    }
+
+</div>

@@ -1,10 +1,10 @@
-﻿@model IEnumerable<ASPPenguinWings.Models.Order>
+﻿@* @model IEnumerable<ASPPenguinWings.Models.Order>
 
 @{
     ViewData["Title"] = "Index";
-}
-@* jijk *@
-@if (TempData["Message"] != null)
+} *@
+
+@* @if (TempData["Message"] != null)
 {
     <div class="alert alert-success">
         @TempData["Message"]
@@ -67,11 +67,127 @@ else
             💳 Завърши поръчка
         </a>
     }
-    @* @if (Model.Any())
-    {
-        <a asp-action="Checkout" class="btn btn-success">
-            💳 Завърши поръчка
-        </a>
-    } *@
-    
+   *@
+@* } *@
+
+@model IEnumerable<ASPPenguinWings.Models.Order>
+
+@{
+    ViewData["Title"] = "Моята количка";
 }
+
+@if (TempData["Message"] != null)
+{
+    <div class="cart-alert">
+        @TempData["Message"]
+    </div>
+}
+
+<div class="cart-page">
+
+    <h1 class="cart-title">🛒 Моята количка</h1>
+
+    @if (!Model.Any())
+    {
+        <div class="empty-cart">
+            <h3>Количката е празна</h3>
+            <p>Добави продукти и се върни тук 🐾</p>
+        </div>
+    }
+    else
+    {
+        <div class="cart-grid">
+
+            @foreach (var item in Model)
+            {
+                <div class="cart-card">
+
+                    <!-- СНИМКА -->
+                    <div class="cart-image">
+                        <img src="@item.Products.ImageUrl" alt="@item.Products.Name" />
+                    </div>
+
+                    <!-- ИНФО -->
+                    <div class="cart-info">
+
+                        <h3>@item.Products.Name</h3>
+
+                        <div class="cart-price">
+                            @item.Products.Price лв.
+                        </div>
+
+                        <!-- КОЛИЧЕСТВО -->
+                        <div class="quantity-box">
+
+                            <a asp-action="Decrease"
+                               asp-route-id="@item.Id"
+                               class="qty-btn">
+                                −
+                            </a>
+
+                            <span>@item.Quantity</span>
+
+                            <a asp-action="Increase"
+                               asp-route-id="@item.Id"
+                               class="qty-btn">
+                                +
+                            </a>
+
+                        </div>
+
+                        <!-- ОБЩО -->
+                        <div class="product-total">
+                            Общо:
+                            <strong>
+                                @(item.Products.Price* item.Quantity) лв.
+                            </strong>
+                        </div>
+
+                    </div>
+
+                    <!-- БУТОНИ -->
+                    <div class="cart-actions">
+
+                        <a asp-action="Delete"
+                           asp-route-id="@item.Id"
+                           class="remove-btn">
+                            ✖ Премахни
+                        </a>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Complete"
+                               asp-route-id="@item.Id"
+                               class="complete-btn">
+                                ✔ Завърши
+                            </a>
+                        }
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+        <!-- FOOTER -->
+        <div class="checkout-section">
+
+            <h2>
+                Обща сума:
+                <span>
+                    @Model.Sum(x => x.Products.Price * x.Quantity) лв.
+                </span>
+            </h2>
+
+            @if (User.IsInRole("User"))
+            {
+                <a asp-action="Checkout" class="checkout-btn">
+                    💳 Завърши поръчката
+                </a>
+            }
+
+        </div>
+    }
+
+</div>

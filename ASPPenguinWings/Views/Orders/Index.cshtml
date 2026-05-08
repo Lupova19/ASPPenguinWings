@@ -1,78 +1,6 @@
 ﻿@* @model IEnumerable<ASPPenguinWings.Models.Order>
 
 @{
-    ViewData["Title"] = "Index";
-} *@
-
-@* @if (TempData["Message"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["Message"]
-    </div>
-}
-<h1>Index</h1>
-
-
-<h2>Моята количка 🛒</h2>
-
-@if (!Model.Any())
-{
-    <p>Нямате добавени продукти.</p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Продукт</th>
-                <th>Цена</th>
-                <th>Количество</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.Products.Name</td>
-                    <td>@item.Products.Price лв.</td>
-                    <td>
-                        <a asp-action="Decrease" asp-route-id="@item.Id">➖</a>
-                        @item.Quantity
-                        <a asp-action="Increase" asp-route-id="@item.Id">➕</a>
-                    </td>
-                    <td>
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">
-                            Премахни
-                        </a>
-                        @if (User.IsInRole("Admin"))
-                        {
-                            <a asp-action="Complete" asp-route-id="@item.Id" class="btn btn-success">
-                                Завърши поръчка
-                            </a>
-                        }
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-
-    <h4>
-        Общо: @Model.Sum(x => x.Products.Price * x.Quantity) лв.
-    </h4>
-
-    @if (User.IsInRole("User"))
-    {
-        <a asp-action="Checkout" class="btn btn-success">
-            💳 Завърши поръчка
-        </a>
-    }
-   *@
-@* } *@
-
-@model IEnumerable<ASPPenguinWings.Models.Order>
-
-@{
     ViewData["Title"] = "Моята количка";
 }
 
@@ -153,6 +81,143 @@ else
                            class="remove-btn">
                             ✖ Премахни
                         </a>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Complete"
+                               asp-route-id="@item.Id"
+                               class="complete-btn">
+                                ✔ Завърши
+                            </a>
+                        }
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+        <!-- FOOTER -->
+        <div class="checkout-section">
+
+            <h2>
+                Обща сума:
+                <span>
+                    @Model.Sum(x => x.Products.Price * x.Quantity) лв.
+                </span>
+            </h2>
+
+            @if (User.IsInRole("User"))
+            {
+                <a asp-action="Checkout" class="checkout-btn">
+                    💳 Завърши поръчката
+                </a>
+            }
+
+        </div>
+    }
+
+</div> *@
+@model IEnumerable<ASPPenguinWings.Models.Order>
+
+@{
+    ViewData["Title"] = "Моята количка";
+}
+
+@if (TempData["Message"] != null)
+{
+    <div class="cart-alert">
+        @TempData["Message"]
+    </div>
+}
+
+<div class="cart-page">
+
+    <h1 class="cart-title">🛒 Моята количка</h1>
+
+    @if (!Model.Any())
+    {
+        <div class="empty-cart">
+            <h3>Количката е празна</h3>
+            <p>Добави продукти и се върни тук 🐾</p>
+        </div>
+    }
+    else
+    {
+        <div class="cart-grid">
+
+            @foreach (var item in Model)
+            {
+                <div class="cart-card">
+
+                    <!-- СНИМКА -->
+                    <div class="cart-image">
+                        <img src="@item.Products.ImageUrl" alt="@item.Products.Name" />
+                    </div>
+
+                    <!-- ИНФО -->
+                    <div class="cart-info">
+
+                        <h3>@item.Products.Name</h3>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <div class="customer-name">
+                                👤 @item.Customers.UserName
+                            </div>
+                        }
+
+                        <div class="cart-price">
+                            @item.Products.Price лв.
+                        </div>
+
+                        <!-- КОЛИЧЕСТВО -->
+                        <div class="quantity-box">
+
+                            @if (!User.IsInRole("Admin"))
+                            {
+                                <a asp-action="Decrease"
+                                   asp-route-id="@item.Id"
+                                   class="qty-btn">
+                                    −
+                                </a>
+                            }
+
+                            <span>@item.Quantity бр.</span>
+
+                            @if (!User.IsInRole("Admin"))
+                            {
+                                <a asp-action="Increase"
+                                   asp-route-id="@item.Id"
+                                   class="qty-btn">
+                                    +
+                                </a>
+                            }
+
+                        </div>
+
+                        <!-- ОБЩО -->
+                        <div class="product-total">
+                            Общо:
+                            <strong>
+                                @(item.Products.Price* item.Quantity) лв.
+                            </strong>
+                        </div>
+
+                    </div>
+
+                    <!-- БУТОНИ -->
+                    <div class="cart-actions">
+
+                        @if (!User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Delete"
+                               asp-route-id="@item.Id"
+                               class="remove-btn">
+                                ✖ Премахни
+                            </a>
+                        }
 
                         @if (User.IsInRole("Admin"))
                         {

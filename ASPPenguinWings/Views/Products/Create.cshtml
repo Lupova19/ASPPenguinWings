@@ -1,67 +1,122 @@
-﻿@model ASPPenguinWings.Models.Product
+﻿
+@model ASPPenguinWings.Models.Product
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Добавяне на продукт";
 }
 
-<h1>Create</h1>
+<div class="create-product-page">
 
-<h4>Product</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+    <div class="create-product-card">
+
+        <!-- LEFT SIDE -->
+        <div class="create-product-image">
+
+            <div class="create-overlay">
+
+                <span class="create-label">
+                    🐾 Penguin Wings
+                </span>
+
+                <h1>Добави нов продукт</h1>
+
+                <p>
+                    Създай красив продуктов каталог за твоя онлайн магазин.
+                </p>
+
             </div>
-            <div class="form-group">
-                <label asp-for="CategoryId" class="control-label"></label>
-                <select asp-for="CategoryId" class ="form-control" asp-items="ViewBag.CategoryId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Size" class="control-label"></label>
-                <input asp-for="Size" class="form-control" />
-                <span asp-validation-for="Size" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Quantity" class="control-label"></label>
-                <input asp-for="Quantity" class="form-control" />
-                <span asp-validation-for="Quantity" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Apply" class="control-label"></label>
-                <input asp-for="Apply" class="form-control" />
-                <span asp-validation-for="Apply" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ImageUrl" class="control-label"></label>
-                <input asp-for="ImageUrl" class="form-control" />
-                <span asp-validation-for="ImageUrl" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+        <div class="create-product-form">
+
+            <h2>➕ Нов продукт</h2>
+
+            <form asp-action="Create">
+
+                <div asp-validation-summary="ModelOnly"
+                     class="text-danger">
+                </div>
+
+                <div class="create-group">
+                    <label>Име</label>
+                    <input asp-for="Name" class="modern-create-input" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="create-group">
+                    <label>Категория</label>
+
+                    <select asp-for="CategoryId"
+                            class="modern-create-input"
+                            asp-items="ViewBag.CategoryId">
+                    </select>
+                </div>
+
+                <div class="create-group">
+                    <label>Размер</label>
+                    <input asp-for="Size" class="modern-create-input" />
+                    <span asp-validation-for="Size" class="text-danger"></span>
+                </div>
+
+                <div class="create-group">
+                    <label>Количество</label>
+                    <input asp-for="Quantity" class="modern-create-input" />
+                    <span asp-validation-for="Quantity" class="text-danger"></span>
+                </div>
+
+                <div class="create-group">
+                    <label>Описание</label>
+
+                    <textarea asp-for="Description"
+                              class="modern-create-input create-textarea">
+                    </textarea>
+
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="create-group">
+                    <label>Подходящо за</label>
+                    <input asp-for="Apply" class="modern-create-input" />
+                    <span asp-validation-for="Apply" class="text-danger"></span>
+                </div>
+
+                <div class="create-group">
+                    <label>Снимка URL</label>
+                    <input asp-for="ImageUrl" class="modern-create-input" />
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                </div>
+
+                <div class="create-group">
+                    <label>Цена</label>
+                    <input asp-for="Price" class="modern-create-input" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+
+                <!-- BUTTONS -->
+                <div class="create-buttons">
+
+                    <button type="submit" class="create-modern-btn">
+                        🚀 Добави продукт
+                    </button>
+
+                    <a asp-action="Index" class="cancel-modern-btn">
+                        ← Назад
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

@@ -3,61 +3,129 @@
     ViewData["Title"] = "За нас";
 }
 
-<div class="about-simple">
+<div class="modern-about-page">
 
-    <h1>За нас</h1>
+    <!-- HERO -->
+    <section class="about-hero">
 
-    <!-- Секция 1 -->
-    <div class="about-row">
-        <div class="about-text">
-            <h2>🐾 Нашата мисия</h2>
+        <div class="about-hero-overlay">
+
+            <span class="about-badge">
+                🐾 Крилете на пингвина
+            </span>
+
+            <h1>
+                Грижа за всеки любимец
+            </h1>
+
             <p>
-                Създадохме този магазин с една идея –
-                да предложим качествени продукти за домашни любимци
-                на достъпни цени.
+                Ние вярваме, че домашните любимци заслужават
+                най-доброто – качествени продукти, грижа и любов.
             </p>
+
         </div>
 
-        <div class="about-image">
-            <img src="/images/pet1.png" />
-        </div>
-    </div>
+    </section>
 
-    <!-- Секция 2 -->
-    <div class="about-row reverse">
-        <div class="about-text">
-            <h2>🚚 Доставка</h2>
-            <p>
-                Осигуряваме бърза и сигурна доставка,
-                за да достигнат продуктите до вас навреме.
-            </p>
+    <!-- CONTENT -->
+    <section class="about-content">
+
+        <!-- CARD 1 -->
+        <div class="about-modern-card">
+
+            <div class="about-modern-image">
+                <img src="/images/pet1.png" />
+            </div>
+
+            <div class="about-modern-text">
+
+                <span>🐾 Нашата мисия</span>
+
+                <h2>
+                    Създадено с любов към животните
+                </h2>
+
+                <p>
+                    Нашата цел е да предложим модерни,
+                    качествени и достъпни продукти
+                    за всеки домашен любимец.
+                </p>
+
+            </div>
+
         </div>
 
-        <div class="about-image">
-            <img src="/images/zooshop.png" />
-        </div>
-    </div>
+        <!-- CARD 2 -->
+        <div class="about-modern-card reverse-card">
 
-    <!-- Секция 3 -->
-    <div class="about-row">
-        <div class="about-text">
-            <h2>💎 Качество</h2>
-            <p>
-                Работим само с проверени продукти,
-                за да гарантираме най-доброто за вашите любимци.
-            </p>
+            <div class="about-modern-image">
+                <img src="/images/zooshop.png" />
+            </div>
+
+            <div class="about-modern-text">
+
+                <span>🚚 Бърза доставка</span>
+
+                <h2>
+                    Доставяме навсякъде
+                </h2>
+
+                <p>
+                    Осигуряваме сигурна и бърза доставка,
+                    за да получите всичко необходимо
+                    за вашия любимец навреме.
+                </p>
+
+            </div>
+
         </div>
 
-        <div class="about-image">
-            <img src="/images/quality.png" />
-        </div>
-    </div>
+        <!-- CARD 3 -->
+        <div class="about-modern-card">
 
-    <!-- Бутон -->
-    <div class="about-bottom">
-        <a asp-controller="Home" asp-action="Contact" class="about-btn">
+            <div class="about-modern-image">
+                <img src="/images/quality.png" />
+            </div>
+
+            <div class="about-modern-text">
+
+                <span>💎 Качество</span>
+
+                <h2>
+                    Само проверени продукти
+                </h2>
+
+                <p>
+                    Работим с висококачествени продукти,
+                    които гарантират комфорт и грижа
+                    за вашите домашни любимци.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- CTA -->
+    <section class="about-cta">
+
+        <h2>
+            Имате въпроси?
+        </h2>
+
+        <p>
+            Свържете се с нас и ще ви помогнем.
+        </p>
+
+        <a asp-controller="Home"
+           asp-action="Contact"
+           class="about-modern-btn">
+
             Свържи се с нас
+
         </a>
-    </div>
+
+    </section>
 
 </div>

@@ -5,46 +5,7 @@
 
 <h1>ByCategory</h1>
 
-@* @foreach (var product in Model)
-{
-    <div class="card">
 
-        <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id" class="card-link">
-            <img src="@product.ImageUrl" alt="@product.Name" />
-            <h4>@product.Name</h4>
-        </a>
-
-        <p class="price">@product.Price лв.</p>
-
-        <div class="actions">
-
-            <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id">
-                Виж
-            </a>
-
-            @if (User.Identity.IsAuthenticated)
-            {
-                <a asp-controller="Orders" asp-action="CreateById" asp-route-productId="@product.Id">
-                    Купи
-                </a>
-            }
-            else
-            {
-                <a asp-area="Identity" asp-page="/Account/Login">
-                    Влез за да купиш
-                </a>
-            }
-
-            @if (User.IsInRole("Admin"))
-            {
-                <a asp-controller="Products" asp-action="Edit" asp-route-id="@product.Id">Редактирай</a>
-                <a asp-action="Delete" asp-route-id="@product.Id">Изтрий</a>
-            }
-
-        </div>
-
-    </div>
-} *@
 @{
     ViewData["Title"] = "Продукти";
 }
@@ -75,7 +36,7 @@
                         Виж
                     </a>
 
-                    @if (User.Identity.IsAuthenticated)
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("User"))
                     {
                         <a class="btn-buy" asp-controller="Orders" asp-action="CreateById" asp-route-productId="@product.Id">
                             Купи

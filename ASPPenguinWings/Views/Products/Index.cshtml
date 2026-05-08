@@ -1,39 +1,102 @@
-﻿@model IEnumerable<ASPPenguinWings.Models.Product>
+﻿
+@model IEnumerable<ASPPenguinWings.Models.Product>
 
 @{
     ViewData["Title"] = "Продукти";
 }
 
-<h2>Продукти</h2>
+<div class="products-page">
 
-@if (User.IsInRole("Admin"))
-{
-    <a asp-action="Create" class="create-btn">+ Добави продукт</a>
-}
+    <!-- TOP -->
+    <div class="products-top">
 
-<div class="products">
-    @foreach (var item in Model)
-    {
-        <div class="card">
+        <div>
+            <span class="products-label">
+                🐾 Крилете на пингвина
+            </span>
 
-            <img src="@item.ImageUrl" alt="@item.Name" />
+            <h1>Нашите продукти</h1>
 
-            <h4>@item.Name</h4>
-
-            <p class="price">@item.Price лв.</p>
-
-            <p>@item.Categories?.Name</p>
-
-            <div class="actions">
-                <a asp-action="Details" asp-route-id="@item.Id">Виж</a>
-
-                @if (User.IsInRole("Admin"))
-                {
-                    <a asp-action="Edit" asp-route-id="@item.Id">Редактирай</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Изтрий</a>
-                }
-            </div>
-
+            <p>
+                Избери най-доброто за своя любимец ✨
+            </p>
         </div>
-    }
+
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-action="Create" class="add-product-btn">
+                ➕ Добави продукт
+            </a>
+        }
+
+    </div>
+
+    <!-- PRODUCTS -->
+    <div class="modern-products-grid">
+
+        @foreach (var item in Model)
+        {
+            <div class="modern-product-card">
+
+                <!-- IMAGE -->
+                <div class="product-image-wrapper">
+
+                    <img src="@item.ImageUrl" alt="@item.Name" />
+
+                    <div class="product-category">
+                        @item.Categories?.Name
+                    </div>
+
+                </div>
+
+                <!-- CONTENT -->
+                <div class="product-card-content">
+
+                    <h3>@item.Name</h3>
+
+                    <p class="product-short-desc">
+                        @item.Description
+                    </p>
+
+                    <!-- PRICE -->
+                    <div class="modern-price">
+                        @item.Price лв.
+                    </div>
+
+                    <!-- BUTTONS -->
+                    <div class="modern-actions">
+
+                        <a asp-action="Details"
+                           asp-route-id="@item.Id"
+                           class="details-modern-btn">
+
+                            👁 <br /> Виж
+                        </a>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Edit"
+                               asp-route-id="@item.Id"
+                               class="edit-modern-btn">
+
+                                ✏️ Редактирай
+                            </a>
+
+                            <a asp-action="Delete"
+                               asp-route-id="@item.Id"
+                               class="delete-modern-btn">
+
+                                🗑 Изтрий
+                            </a>
+                        }
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
 </div>

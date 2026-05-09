@@ -62,6 +62,18 @@
                     <div class="modern-price">
                         @item.Price лв.
                     </div>
+                    @if (item.Quantity > 0)
+                    {
+                        <p class="stock in-stock">
+                            ✔ Налични: @item.Quantity бр.
+                        </p>
+                    }
+                    else
+                    {
+                        <p class="stock out-stock">
+                            ❌ Изчерпан продукт
+                        </p>
+                    }
 
                     <!-- BUTTONS -->
                     <div class="modern-actions">

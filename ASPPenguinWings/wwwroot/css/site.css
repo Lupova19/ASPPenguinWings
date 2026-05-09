@@ -2634,3 +2634,69 @@ body {
         transform: translateY(-4px);
         background: #ecf0f1;
     }
+
+/* DROPDOWN */
+.nav-item.dropdown {
+    position: relative;
+}
+
+    /* MENU */
+    .nav-item.dropdown .dropdown-menu {
+        display: block;
+        position: absolute;
+        top: 120%;
+        left: 0;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        min-width: 240px;
+        padding: 12px;
+        background: white;
+        border: none;
+        border-radius: 18px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        transition: all 0.25s ease;
+    }
+
+    /* SHOW */
+    .nav-item.dropdown:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+/* ITEMS */
+.dropdown-menu .dropdown-item {
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #2c3e50 !important;
+    transition: 0.2s;
+}
+
+    /* HOVER */
+    .dropdown-menu .dropdown-item:hover {
+        background: #f4fdfb;
+        color: #1abc9c !important;
+        transform: translateX(5px);
+    }
+
+    /* ACTIVE */
+    .dropdown-menu .dropdown-item:active {
+        background: #e8f8f5;
+    }
+/* Õ¿À»◊ÕŒ—“ */
+.stock {
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.in-stock {
+    color: #27ae60;
+}
+
+.out-stock {
+    color: #e74c3c;
+}

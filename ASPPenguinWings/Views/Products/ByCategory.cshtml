@@ -6,7 +6,7 @@
 <h1>ByCategory</h1>
 
 
-@{
+@* @{
     ViewData["Title"] = "Продукти";
 }
 
@@ -53,4 +53,89 @@
 
         </div>
     }
+</div> *@
+@{
+    ViewData["Title"] = "Продукти";
+}
+
+<h1 class="text-center mb-4">Нашите продукти 🐾</h1>
+
+<div class="products">
+
+    @foreach (var product in Model)
+    {
+        <div class="card">
+
+            <!-- СНИМКА -->
+            <div class="card-image">
+                <img src="@product.ImageUrl" alt="@product.Name" />
+            </div>
+
+            <!-- ИНФО -->
+            <div class="card-body">
+
+                <h4>@product.Name</h4>
+
+                <div class="price-box">
+                    @product.Price лв.
+                </div>
+
+                <!-- НАЛИЧНОСТ -->
+                @if (product.Quantity > 0)
+                {
+                    <p class="stock in-stock">
+                        ✔ Налични: @product.Quantity бр.
+                    </p>
+                }
+                else
+                {
+                    <p class="stock out-stock">
+                        ❌ Изчерпан продукт
+                    </p>
+                }
+
+                <!-- БУТОНИ -->
+                <div class="actions">
+
+                    <a class="btn-view"
+                       asp-controller="Products"
+                       asp-action="Details"
+                       asp-route-id="@product.Id">
+
+                        Виж
+
+                    </a>
+
+                    @if (product.Quantity > 0)
+                    {
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("User"))
+                        {
+                            <a class="btn-buy"
+                               asp-controller="Orders"
+                               asp-action="CreateById"
+                               asp-route-productId="@product.Id">
+
+                                Купи
+
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="btn-login"
+                               asp-area="Identity"
+                               asp-page="/Account/Login">
+
+                                Влез за да купиш
+
+                            </a>
+                        }
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+    }
+
 </div>

@@ -95,22 +95,44 @@ namespace ASPPenguinWings.Controllers
         }
         public async Task<IActionResult> CreateById(int productId)
         {
-            //Order order = new Order();
-            //order.DateOn = DateTime.Now;
-            //order.CustomerId = _userManager.GetUserId(User);
-            //order.ProductId = productId;
-            //order.Quantity = 1;
-            //if (ModelState.IsValid)
+            //string userId = _userManager.GetUserId(User);
+
+            //var existingOrder = _context.Orders
+            //    .FirstOrDefault(o => o.ProductId == productId && o.CustomerId == userId);
+
+            //if (existingOrder != null)
             //{
-            //    _context.Orders.Add(order);
-            //    await _context.SaveChangesAsync();
-            //    return RedirectToAction(nameof(Index));
+            //    existingOrder.Quantity++;
             //}
-            //return View("Index");
+            //else
+            //{
+            //    Order order = new Order
+            //    {
+            //        DateOn = DateTime.Now,
+            //        CustomerId = userId,
+            //        ProductId = productId,
+            //        Quantity = 1
+            //    };
+
+            //    _context.Orders.Add(order);
+            //}
+
+            //await _context.SaveChangesAsync();
+
+            //return RedirectToAction("Index");
             string userId = _userManager.GetUserId(User);
 
+            var product = await _context.Products.FindAsync(productId);
+
+            if (product == null || product.Quantity <= 0)
+            {
+                return RedirectToAction("Index");
+            }
+
             var existingOrder = _context.Orders
-                .FirstOrDefault(o => o.ProductId == productId && o.CustomerId == userId);
+                .FirstOrDefault(o => o.ProductId == productId
+                                  && o.CustomerId == userId
+                                  && !o.IsCompleted);
 
             if (existingOrder != null)
             {
@@ -128,6 +150,9 @@ namespace ASPPenguinWings.Controllers
 
                 _context.Orders.Add(order);
             }
+
+            // НАМАЛЯ КОЛИЧЕСТВОТО
+            product.Quantity--;
 
             await _context.SaveChangesAsync();
 
@@ -249,27 +274,63 @@ namespace ASPPenguinWings.Controllers
         {
             return _context.Orders.Any(e => e.Id == id);
         }
-        //h
+       
         public async Task<IActionResult> Increase(int id)
         {
             var order = await _context.Orders.FindAsync(id);
 
             if (order != null)
             {
-                order.Quantity++;
-                await _context.SaveChangesAsync();
+                var product = await _context.Products.FindAsync(order.ProductId);
+
+                // има останали бройки
+                if (product != null && product.Quantity > 0)
+                {
+                    order.Quantity++;
+
+                    // намаля наличността
+                    product.Quantity--;
+
+                    await _context.SaveChangesAsync();
+                }
             }
 
             return RedirectToAction(nameof(Index));
         }
 
+        //public async Task<IActionResult> Decrease(int id)
+        //{
+        //    var order = await _context.Orders.FindAsync(id);
+
+        //    if (order != null)
+        //    {
+        //        order.Quantity--;
+
+        //        if (order.Quantity <= 0)
+        //        {
+        //            _context.Orders.Remove(order);
+        //        }
+
+        //        await _context.SaveChangesAsync();
+        //    }
+
+        //    return RedirectToAction(nameof(Index));
+        //}
         public async Task<IActionResult> Decrease(int id)
         {
             var order = await _context.Orders.FindAsync(id);
 
             if (order != null)
             {
+                var product = await _context.Products.FindAsync(order.ProductId);
+
                 order.Quantity--;
+
+                // връща бройка обратно
+                if (product != null)
+                {
+                    product.Quantity++;
+                }
 
                 if (order.Quantity <= 0)
                 {
@@ -299,6 +360,7 @@ namespace ASPPenguinWings.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+       
         //ножжж
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Complete(int id)

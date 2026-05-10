@@ -63,6 +63,7 @@ namespace ASPPenguinWings.Controllers
             product.DateOn = DateTime.Now;
             if (ModelState.IsValid)
             {
+                product.ImageUrl = "/images/" + product.ImageUrl; /*kk*/
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

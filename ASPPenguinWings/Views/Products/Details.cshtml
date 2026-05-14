@@ -9,14 +9,12 @@
 
     <div class="details-card">
 
-        <!-- LEFT -->
         <div class="details-image">
 
             <img src="@Model.ImageUrl" alt="@Model.Name" />
 
         </div>
 
-        <!-- RIGHT -->
         <div class="details-info">
 
             <span class="details-category">
@@ -26,14 +24,13 @@
             <h1>@Model.Name</h1>
 
             <div class="details-price">
-                @Model.Price лв.
+                @Model.Price €
             </div>
 
             <p class="details-description">
                 @Model.Description
             </p>
 
-            <!-- INFO BOXES -->
             <div class="details-grid">
 
                 <div class="info-box">
@@ -53,28 +50,20 @@
 
             </div>
 
-            <!-- BUTTONS -->
             <div class="details-buttons">
                 @if (User.IsInRole("User"))
                 {
-                    <a class="buy-btn-modern"
-                       asp-controller="Orders"
-                       asp-action="CreateById"
-                       asp-route-productId="@Model.Id">
+                    <a class="buy-btn-modern" asp-controller="Orders" asp-action="CreateById" asp-route-productId="@Model.Id">
                         🛒 Купи сега
                     </a>
                 }
 
                 @if (User.IsInRole("Admin"))
                 {
-                    <a class="edit-btn-modern"
-                       asp-action="Edit"
-                       asp-route-id="@Model?.Id">
+                    <a class="edit-btn-modern" asp-action="Edit" asp-route-id="@Model?.Id">
                         ✏️ Редактирай
                     </a>
-                    <a class="delete-btn-modern"
-                       asp-action="Delete"
-                       asp-route-id="@Model?.Id">
+                    <a class="delete-btn-modern" asp-action="Delete" asp-route-id="@Model?.Id">
                         Изтрий
                     </a>
                 }

@@ -9,14 +9,12 @@
 
     <div class="delete-order-card">
 
-        <!-- IMAGE -->
         <div class="delete-order-image">
 
             <img src="@Model.Products.ImageUrl" alt="@Model.Products.Name" />
 
         </div>
 
-        <!-- INFO -->
         <div class="delete-order-info">
 
             <span class="order-warning">
@@ -29,7 +27,6 @@
                 Сигурни ли сте, че искате да премахнете тази поръчка?
             </p>
 
-            <!-- DETAILS -->
             <div class="order-delete-details">
 
                 <div class="order-detail-box">
@@ -44,7 +41,7 @@
 
                 <div class="order-detail-box">
                     <span>Цена</span>
-                    <strong>@Model.Products.Price лв.</strong>
+                    <strong>@Model.Products.Price € </strong>
                 </div>
 
                 <div class="order-detail-box">
@@ -54,7 +51,7 @@
 
             </div>
 
-            <!-- TOTAL -->
+            
             <div class="order-total-price">
                 Общо:
                 <strong>
@@ -62,7 +59,6 @@
                 </strong>
             </div>
 
-            <!-- BUTTONS -->
             <div class="order-delete-buttons">
 
                 <form asp-action="Delete">

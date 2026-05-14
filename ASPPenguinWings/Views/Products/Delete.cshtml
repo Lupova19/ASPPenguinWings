@@ -9,12 +9,10 @@
 
     <div class="delete-card">
 
-        <!-- IMAGE -->
         <div class="delete-image">
             <img src="@Model.ImageUrl" alt="@Model.Name" />
         </div>
 
-        <!-- INFO -->
         <div class="delete-info">
 
             <span class="delete-warning">
@@ -41,7 +39,7 @@
 
                 <div class="delete-box">
                     <span>Цена</span>
-                    <strong>@Model.Price лв.</strong>
+                    <strong>@Model.Price € </strong>
                 </div>
 
                 <div class="delete-box">
@@ -55,7 +53,6 @@
                 @Model.Description
             </p>
 
-            <!-- BUTTONS -->
             <div class="delete-buttons">
 
                 <form asp-action="Delete">

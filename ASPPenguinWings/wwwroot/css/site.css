@@ -488,12 +488,20 @@ body {
         }
 
  /*СОЦИАЛНИ ИКОНИ (кръгли)*/ 
-.social-icons {
+/*.social-icons {
     display: flex;
     gap: 10px;
+}*/
+.social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    margin-top: 20px;
+    flex-wrap: wrap;
 }
 
-    .social-icons a {
+   /* .social-icons a {
         width: 40px;
         height: 40px;
         display: flex;
@@ -505,12 +513,25 @@ body {
         overflow: hidden;
         transition: 0.3s;
         text-align: center;
+    }*/
+    .social-icons a {
+        width: 52px;
+        height: 52px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: white;
+        border-radius: 50%;
+        overflow: hidden;
+        transition: 0.3s;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.15);
     }
 
-     /*самите картинки*/ 
+     /*самите картинки*/
     .social-icons img {
-        width: 20px;
-        height: 20px;
+        width: 24px;
+        height: 24px;
     }
 
      /*hover ефект*/ 
@@ -2700,3 +2721,15 @@ body {
 .out-stock {
     color: #e74c3c;
 }
+.details-image {
+    width: 500px;
+    height: 500px;
+    overflow: hidden;
+    border-radius: 25px;
+}
+
+    .details-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }

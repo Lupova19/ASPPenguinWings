@@ -30,12 +30,10 @@
             {
                 <div class="cart-card">
 
-                    <!-- СНИМКА -->
                     <div class="cart-image">
                         <img src="@item.Products.ImageUrl" alt="@item.Products.Name" />
                     </div>
 
-                    <!-- ИНФО -->
                     <div class="cart-info">
 
                         <h3>@item.Products.Name</h3>
@@ -48,10 +46,9 @@
                         }
 
                         <div class="cart-price">
-                            @item.Products.Price лв.
+                            @item.Products.Price €
                         </div>
 
-                        <!-- КОЛИЧЕСТВО -->
                         <div class="quantity-box">
 
                             @if (!User.IsInRole("Admin"))
@@ -76,17 +73,15 @@
 
                         </div>
 
-                        <!-- ОБЩО -->
                         <div class="product-total">
                             Общо:
                             <strong>
-                                @(item.Products.Price* item.Quantity) лв.
+                                @(item.Products.Price* item.Quantity) €
                             </strong>
                         </div>
 
                     </div>
 
-                    <!-- БУТОНИ -->
                     <div class="cart-actions">
 
                         @if (!User.IsInRole("Admin"))
@@ -114,13 +109,12 @@
 
         </div>
 
-        <!-- FOOTER -->
         <div class="checkout-section">
 
             <h2>
                 Обща сума:
                 <span>
-                    @Model.Sum(x => x.Products.Price * x.Quantity) лв.
+                    @Model.Sum(x => x.Products.Price * x.Quantity) €
                 </span>
             </h2>
 
@@ -130,8 +124,6 @@
                     💳 Завърши поръчката
                 </a>
             }
-
         </div>
     }
-
 </div>

@@ -47,7 +47,7 @@ namespace ASPPenguinWings.Controllers
         }
 
         // GET: Products/Create
-        [Authorize(Roles = "Admin")] //
+        [Authorize(Roles = "Admin")] 
         public IActionResult Create()
         {
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
@@ -63,7 +63,7 @@ namespace ASPPenguinWings.Controllers
             product.DateOn = DateTime.Now;
             if (ModelState.IsValid)
             {
-                product.ImageUrl = "/images/" + product.ImageUrl; /*kk*/
+                product.ImageUrl = "/images/" + product.ImageUrl; 
                 _context.Add(product);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -91,8 +91,6 @@ namespace ASPPenguinWings.Controllers
         }
 
         // POST: Products/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,CategoryId,Size,Quantity,Description,Apply,ImageUrl,Price,DateOn")] Product product)
@@ -166,11 +164,10 @@ namespace ASPPenguinWings.Controllers
         {
             return _context.Products.Any(e => e.Id == id);
         }
-        // // //
+
         // GET: Products/ByCategory/5
         public async Task<IActionResult> ByCategory(int id)
         {
-            // Взимаме категорията по id
             var category = await _context.Categories
                 .FirstOrDefaultAsync(c => c.Id == id);
 
@@ -179,15 +176,13 @@ namespace ASPPenguinWings.Controllers
                 return NotFound();
             }
 
-            // Взимаме продуктите само от тази категория
             var products = await _context.Products
                 .Where(p => p.CategoryId == id)
                 .ToListAsync();
 
-            // Изпращаме името на категорията за заглавие
             ViewBag.CategoryName = category.Name;
 
-            return View(products); // View получава List<Product>
+            return View(products); 
         }
     }
 }

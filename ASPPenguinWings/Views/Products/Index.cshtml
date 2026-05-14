@@ -7,7 +7,6 @@
 
 <div class="products-page">
 
-    <!-- TOP -->
     <div class="products-top">
 
         <div>
@@ -31,14 +30,12 @@
 
     </div>
 
-    <!-- PRODUCTS -->
     <div class="modern-products-grid">
 
         @foreach (var item in Model)
         {
             <div class="modern-product-card">
 
-                <!-- IMAGE -->
                 <div class="product-image-wrapper">
 
                     <img src="@item.ImageUrl" alt="@item.Name" />
@@ -49,7 +46,6 @@
 
                 </div>
 
-                <!-- CONTENT -->
                 <div class="product-card-content">
 
                     <h3>@item.Name</h3>
@@ -58,9 +54,8 @@
                         @item.Description
                     </p>
 
-                    <!-- PRICE -->
                     <div class="modern-price">
-                        @item.Price лв.
+                        @item.Price €
                     </div>
                     @if (item.Quantity > 0)
                     {
@@ -75,28 +70,21 @@
                         </p>
                     }
 
-                    <!-- BUTTONS -->
                     <div class="modern-actions">
 
-                        <a asp-action="Details"
-                           asp-route-id="@item.Id"
-                           class="details-modern-btn">
+                        <a asp-action="Details"  asp-route-id="@item.Id" class="details-modern-btn">
 
                             👁 <br /> Виж
                         </a>
 
                         @if (User.IsInRole("Admin"))
                         {
-                            <a asp-action="Edit"
-                               asp-route-id="@item.Id"
-                               class="edit-modern-btn">
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="edit-modern-btn">
 
                                 ✏️ Редактирай
                             </a>
 
-                            <a asp-action="Delete"
-                               asp-route-id="@item.Id"
-                               class="delete-modern-btn">
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="delete-modern-btn">
 
                                 🗑 Изтрий
                             </a>
@@ -107,8 +95,6 @@
                 </div>
 
             </div>
-        }
-
+    }
     </div>
-
 </div>

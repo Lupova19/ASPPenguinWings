@@ -10,21 +10,18 @@
     {
         <div class="card">
 
-            <!-- СНИМКА -->
             <div class="card-image">
                 <img src="@product.ImageUrl" alt="@product.Name" />
             </div>
 
-            <!-- ИНФО -->
             <div class="card-body">
 
                 <h4>@product.Name</h4>
 
                 <div class="price-box">
-                    @product.Price лв.
+                    @product.Price €
                 </div>
 
-                <!-- НАЛИЧНОСТ -->
                 @if (product.Quantity > 0)
                 {
                     <p class="stock in-stock">
@@ -38,13 +35,10 @@
                     </p>
                 }
 
-                <!-- БУТОНИ -->
                 <div class="actions">
 
                     <a class="btn-view"
-                       asp-controller="Products"
-                       asp-action="Details"
-                       asp-route-id="@product.Id">
+                       asp-controller="Products" asp-action="Details" asp-route-id="@product.Id">
 
                         Виж
 
@@ -54,10 +48,7 @@
                     {
                         @if (User.Identity.IsAuthenticated && User.IsInRole("User"))
                         {
-                            <a class="btn-buy"
-                               asp-controller="Orders"
-                               asp-action="CreateById"
-                               asp-route-productId="@product.Id">
+                            <a class="btn-buy" asp-controller="Orders" asp-action="CreateById" asp-route-productId="@product.Id">
 
                                 Купи
 
@@ -65,9 +56,7 @@
                         }
                         else
                         {
-                            <a class="btn-login"
-                               asp-area="Identity"
-                               asp-page="/Account/Login">
+                            <a class="btn-login" asp-area="Identity" asp-page="/Account/Login">
 
                                 Влез за да купиш
 
@@ -80,6 +69,5 @@
             </div>
 
         </div>
-    }
-
+}
 </div>
